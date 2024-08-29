@@ -1,0 +1,58 @@
+.app {
+  background-color: #21252b;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+
+  /* text-align: center; */
+}
+
+/* button {
+  font-size: calc(10px + 2vmin);
+} */
+.noteEditor-wrapper {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.editandpreview {
+  display: inline-flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  flex: 0 0 100%;
+  height: calc(100% - 52px);
+  width: 100%;
+}
+
+.noteTitle-Editor {
+  height: 52px;
+  background-color: #21252b;
+  font-weight: bold;
+  color: #abb2bf;
+}
+
+.noteTitle-Editor::placeholder {
+  color: #abb2bf;
+  font-weight: bold;
+}
+
+.header {
+  -webkit-app-region: drag;
+  border: 2px solid #21252b;
+  /* border-radius: 20px; */
+  /* background-color: #21252b; */
+}
+
+.header-button {
+  /* align-self: center; */
+  /* display: inline; */
+  /* vertical-align: middle; */
+  background-color: transparent;
+  /* justify-self: flex-end; */
+  /* height: 100%; */
+  margin-top: 10px;
+  /* float: right; */
+  /* float: left; */
+  -webkit-app-region: no-drag;
+}

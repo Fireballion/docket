@@ -1,0 +1,9 @@
+.filetree-wrapper {
+  flex: 0 0 20%;
+  padding: 12px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  color: #abb2bf;
+  background-color: rgba(171, 178, 191, 0.05);
+}
