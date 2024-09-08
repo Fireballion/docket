@@ -1,24 +1,38 @@
 import * as electron from 'electron';
-import {app, BrowserWindow, ipcMain} from 'electron';
+import {app, BrowserWindow} from 'electron';
 import {join} from 'node:path';
 import {URL} from 'node:url';
+import {setupTitlebar, attachTitlebarToWindow} from 'custom-electron-titlebar/main';
 
-async function createWindow() {
+setupTitlebar();
+
+export async function createWindow() {
   const browserWindow = new BrowserWindow({
+    // movable: true,
     minWidth: 500,
     minHeight: 328,
     frame: false,
     titleBarStyle: 'hidden',
-    titleBarOverlay: true,
-    show: false, // Use the 'ready-to-show' event to show the instantiated BrowserWindow.
+
+    // autoHideMenuBar: true,
+    titleBarOverlay: {
+      color: '#21252b',
+      symbolColor: '#abb3bf',
+      // height: 10,
+    },
+    // titleBarOverlay: true,
+    // show: true, // Use the 'ready-to-show' event to show the instantiated BrowserWindow.
     vibrancy: 'under-window',
     visualEffectState: 'active',
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
+      plugins: true,
 
       sandbox: false, // Sandbox disabled because the demo of preload script depend on the Node.js api
       webviewTag: false, // The webview tag is not recommended. Consider alternatives like an iframe or Electron's BrowserView. @see https://www.electronjs.org/docs/latest/api/webview-tag#warning
+      // preload: join('../preload/src/preload.js'),
+      // preload: app.getAppPath()
       preload: join(app.getAppPath(), 'packages/preload/src/preload.js'),
     },
   });
@@ -68,7 +82,7 @@ async function createWindow() {
       : new URL('../renderer/dist/index.html', 'file://' + __dirname).toString();
 
   await browserWindow.loadURL(pageUrl);
-
+  attachTitlebarToWindow(browserWindow);
   return browserWindow;
 }
 
@@ -97,14 +111,14 @@ function UpsertKeyValue(
  */
 export async function restoreOrCreateWindow() {
   let window = BrowserWindow.getAllWindows().find(w => !w.isDestroyed());
-
+  // if (BrowserWindow.getAllWindows().length == 0) {
+  //   createWindow();
+  // }
   if (window === undefined) {
     window = await createWindow();
   }
-
   if (window.isMinimized()) {
     window.restore();
   }
-
   window.focus();
 }

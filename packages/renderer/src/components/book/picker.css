@@ -1,0 +1,124 @@
+.picker {
+  position: relative;
+}
+
+.swatch {
+  width: 100%;
+  height: 50%;
+  border-radius: 8px;
+  /* border: 3px solid #fff; */
+  margin-right: 10vw;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.popover {
+  padding: 15px;
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  border-radius: 9px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: #33333a;
+  z-index: 999;
+}
+.hex-input {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.input-wrapper {
+  background-color: #33333a;
+  border: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 25% 75%;
+
+  margin-top: 15px;
+  color: white;
+  /* border: solid #595965; */
+  border-radius: 5px;
+}
+
+/* Custom layout */
+.custom-layout .react-colorful {
+  /* padding: 16px; */
+  border-radius: 12px;
+  border-color: #999;
+  background: #33333a;
+  /* box-shadow: 0 6px 12px #999; */
+}
+
+.custom-layout .react-colorful__saturation {
+  margin-top: 15px;
+  border-radius: 5px;
+  border-bottom: none;
+}
+
+.custom-layout .react-colorful__hue {
+  order: -1;
+}
+
+.custom-layout .react-colorful__hue {
+  height: 14px;
+  border-radius: 5px;
+}
+
+/* .custom-layout .react-colorful__hue,
+.custom-layout .react-colorful__alpha {
+  height: 14px;
+  border-radius: 5px;
+}
+
+.custom-layout .react-colorful__hue-pointer,
+.custom-layout .react-colorful__alpha-pointer {
+  width: 20px;
+  height: 20px;
+} */
+.settings-border {
+  width: 100%;
+
+  border-color: #606060;
+  background-color: #606060;
+  color: #606060;
+  border: solid;
+  border-radius: 5px;
+}
+.settings-wrapper {
+  height: inherit;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+header {
+  grid-area: header;
+  background-color: green;
+}
+.content {
+  /* grid-area: main; */
+  /* width: 100%; */
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+footer {
+  grid-area: footer;
+}
+h3 {
+  font-size: medium;
+}
+h4 {
+  font-size: medium;
+  font-weight: normal;
+}

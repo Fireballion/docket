@@ -26,3 +26,7 @@ export class Note {
     this.properties = noteProps;
   }
 }
+type Folder = {
+  id: string;
+  name: string;
+};

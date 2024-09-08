@@ -1,14 +1,15 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import './app.css';
-import Editor from './components/editor/editor';
-import {Note, Notebook} from './components/notebook/notebook';
-import Preview from './components/parser/preview';
+import '../../app.css';
+import './book.css';
+import Editor from '../../components/editor/editor';
+import {Note, Notebook} from '../../components/notebook/notebook';
+import Preview from '../../components/parser/preview';
 import ls from 'localstorage-slim';
 import {Resizable} from 're-resizable';
-import NotebooksBar from './components/notebook/notebooksbar';
-import NotesBar from './components/notebook/notesbar';
+import NotebooksBar from '../../components/notebook/notebooksbar';
+import NotesBar from '../../components/notebook/notesbar';
 import uuid from 'react-uuid';
-import Library from './components/library/library';
+import Library from '../../components/library/library';
 import {ArrowDownOutlined, ArrowUpOutlined, BookOutlined, EditOutlined} from '@ant-design/icons';
 import {
   Button,
@@ -22,6 +23,7 @@ import {
   theme,
   Typography,
 } from 'antd';
+import {useNavigate} from 'react-router-dom';
 
 const {Header, Content} = Layout;
 
@@ -42,7 +44,7 @@ const contentStyle: React.CSSProperties = {
   paddingLeft: '2px',
   paddingRight: '2px',
   height: '100%',
-  backgroundColor: '#21252b',
+  backgroundColor: bgColor[1],
 };
 const footerStyle: React.CSSProperties = {
   textAlign: 'center',
@@ -58,10 +60,7 @@ export enum SortMode {
   Custom,
 }
 
-const App: React.FC = () => {
-  ls.clear();
-
-  const [dataExists] = useState(ls.get('0') ?? false);
+const Book: React.FC = () => {
   const [notebooks, setNotebooks] = useState<Notebook[] | []>(JSON.parse(ls.get('0') ?? '[]'));
   const [activeNotebook, setActiveNotebook] = useState<Notebook | null>(null);
   const [activeNote, setActiveNote] = useState<Note | null>(null);
@@ -200,6 +199,8 @@ const App: React.FC = () => {
     },
   ];
 
+  const nav = useNavigate();
+
   return (
     <div className="app">
       <ConfigProvider
@@ -243,7 +244,9 @@ const App: React.FC = () => {
                 icon={<BookOutlined />}
                 style={{float: 'left', marginLeft: '13px'}}
                 aria-label={'Create Note'}
-                onClick={() => {}}
+                onClick={() => {
+                  nav('/');
+                }}
               >
                 My Books
               </Button>
@@ -279,6 +282,7 @@ const App: React.FC = () => {
         <Resizable
           minWidth={'25%'}
           maxWidth={'40%'}
+          // style={{padding: '8px', backgroundColor: 'green'}}
           defaultSize={{width: '25%', height: '100%'}}
           enable={{
             top: false,
@@ -451,4 +455,4 @@ const App: React.FC = () => {
     </div>
   );
 };
-export default App;
+export default Book;
