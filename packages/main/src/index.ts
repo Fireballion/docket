@@ -63,7 +63,7 @@ app.on('window-all-closed', () => {
 app.on('activate', restoreOrCreateWindow);
 
 ipcMain.on('application-export-to-markdown', (_event, _args) => {
-  let filename = dialog.showSaveDialogSync({
+  const filename = dialog.showSaveDialogSync({
     filters: [{name: 'Markdown', extensions: ['md']}],
     properties: ['createDirectory'],
   });
@@ -77,6 +77,7 @@ async function handleFileOpen() {
   }
 }
 function writeData(path: string, data: string) {
+  // eslint-disable-next-line
   const folder = /^(.*[\\\/])/.exec(normalize(path));
   if (folder) {
     fs.mkdirSync(folder[0], {recursive: true});
@@ -99,6 +100,7 @@ function getSequelizeInstance() {
 
 async function getBooks() {
   try {
+    await seqDb.sync();
     const res = await Books.findAll();
     console.log(res.every(res => res instanceof Books));
     console.log(JSON.stringify(res, null, 2));
@@ -109,6 +111,7 @@ async function getBooks() {
 }
 async function addBook(name: string, path: string) {
   try {
+    await seqDb.sync();
     await Books.create({bookName: name, path: path});
     return 'success';
   } catch (e) {
