@@ -17,7 +17,7 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "ignorePatterns": ["node_modules/**", "**/dist/**", "packages/**"],
+  "ignorePatterns": ["node_modules/**", "**/dist/**"],
   "rules": {
     "@typescript-eslint/no-unused-vars": [
       "error",
